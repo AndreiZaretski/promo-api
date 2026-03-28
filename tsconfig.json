@@ -20,7 +20,11 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "strict": true,
+    "paths": {
+      "@prisma/client": ["src/generated/prisma"]
+    }
   },
   "watchOptions": {
     "watchFile": "priorityPollingInterval",

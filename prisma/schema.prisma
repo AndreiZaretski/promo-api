@@ -5,9 +5,29 @@
 
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
+}
+
+model PromoCode {
+  id          Int          @id @default(autoincrement())
+  code        String       @unique
+  discount    Int          
+  limit       Int          // лимит активаций
+  expiresAt   DateTime
+  activations Activation[]
+  createdAt   DateTime     @default(now())
+}
+
+model Activation {
+  id          Int       @id @default(autoincrement())
+  email       String
+  promoCode   PromoCode @relation(fields: [promoCodeId], references: [id])
+  promoCodeId Int
+  createdAt   DateTime  @default(now())
+
+  @@unique([email, promoCodeId])
 }
